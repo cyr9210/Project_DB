@@ -340,3 +340,13 @@ CREATE SEQUENCE PJT_NO INCREMENT BY 1 START WITH 1 MAXVALUE 100 MINVALUE 1;
 CREATE SEQUENCE CHAT_NO INCREMENT BY 1 MAXVALUE 100 MINVALUE 1 CACHE 20;
 
 CREATE SEQUENCE CHAT_HIS_NO INCREMENT BY 1 MAXVALUE 100 MINVALUE 1 CACHE 20;
+
+--김근열
+alter table notice 
+  modify invite_no not null;    
+  
+create sequence invete_seq 
+start with 1 increment BY 1 maxvalue 100000;
+
+create sequence notice_seq 
+start with 1 increment BY 1 maxvalue 100000;
