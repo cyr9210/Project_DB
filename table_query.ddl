@@ -328,3 +328,9 @@ ALTER TABLE TAG
 
 ALTER TABLE TAG
 	ADD (CONSTRAINT  R_52 FOREIGN KEY (INFO_NO) REFERENCES PRJ_INFO(INFO_NO));
+									
+									
+									
+-- 최수춘 
+create SEQUENCE checklist_seq;
+create SEQUENCE list_seq;
