@@ -384,3 +384,8 @@ BEGIN
   END IF;
   
 END VIEW_MEMBER_INFORMATION;
+									
+--최수춘
+create SEQUENCE checklist_seq;
+create SEQUENCE list_seq;
+									
