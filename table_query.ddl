@@ -329,7 +329,7 @@ CREATE SEQUENCE DESCRIPTION_SEQ;
 									
 CREATE SEQUENCE POST_SEQ;
 									
-CREATE SEQUENCE REFIY_SEQ;
+CREATE SEQUENCE REPLY_SEQ;
 									
 CREATE SEQUENCE TAG_SEQ;
                                                                   
@@ -344,7 +344,7 @@ CREATE SEQUENCE CHAT_HIS_NO INCREMENT BY 1 START WITH 1 MAXVALUE 100 MINVALUE 1 
 alter table notice 
   modify invite_no not null;    
   
-create sequence invete_seq 
+create sequence invite_seq 
 start with 1 increment BY 1 maxvalue 100000;
 
 create sequence notice_seq 
@@ -353,6 +353,7 @@ start with 1 increment BY 1 maxvalue 100000;
 --황소희
 CREATE SEQUENCE EXTER_M_NO_SEQ INCREMENT BY 1;
 CREATE SEQUENCE MEM_NO_SEQ INCREMENT BY 1;
+CREATE SEQUENCE INTERLINKED_SEQ INCREMENT BY 1;
 									
 --TOTAL_NUMBER로 외부회원/내부회원 여부를 확인 후 정보를 가져온다.
 
