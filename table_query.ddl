@@ -382,7 +382,8 @@ BEGIN
     FROM INTER_M_INFO
     WHERE MEMBER_NO = general_member;
   END IF;
-  
+  /
+
 END VIEW_MEMBER_INFORMATION;
 									
 --최수춘
