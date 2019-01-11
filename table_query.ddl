@@ -328,15 +328,15 @@ ALTER TABLE TAG
 	ADD (CONSTRAINT  R_52 FOREIGN KEY (INFO_NO) REFERENCES PRJ_INFO(INFO_NO));
                                                                   
 --정철희
-CREATE SEQUENCE CARD_SEQ
+CREATE SEQUENCE CARD_SEQ;
 									
-CREATE SEQUENCE DESCRIPTION_SEQ
+CREATE SEQUENCE DESCRIPTION_SEQ;
 									
-CREATE SEQUENCE POST_SEQ
+CREATE SEQUENCE POST_SEQ;
 									
-CREATE SEQUENCE REFIY_SEQ
+CREATE SEQUENCE REFIY_SEQ;
 									
-CREATE SEQUENCE TAG_SEQ
+CREATE SEQUENCE TAG_SEQ;
                                                                   
 --윤병록					
 CREATE SEQUENCE PJT_NO INCREMENT BY 1 START WITH 1 MAXVALUE 100 MINVALUE 1;
@@ -344,3 +344,50 @@ CREATE SEQUENCE PJT_NO INCREMENT BY 1 START WITH 1 MAXVALUE 100 MINVALUE 1;
 CREATE SEQUENCE CHAT_NO INCREMENT BY 1 START WITH 1 MAXVALUE 100 MINVALUE 1;
 									
 CREATE SEQUENCE CHAT_HIS_NO INCREMENT BY 1 START WITH 1 MAXVALUE 100 MINVALUE 1 ;
+
+--김근열
+alter table notice 
+  modify invite_no not null;    
+  
+create sequence invete_seq 
+start with 1 increment BY 1 maxvalue 100000;
+
+create sequence notice_seq 
+start with 1 increment BY 1 maxvalue 100000;
+
+--황소희
+CREATE SEQUENCE EXTER_M_NO_SEQ INCREMENT BY 1;
+CREATE SEQUENCE MEM_NO_SEQ INCREMENT BY 1;
+									
+--TOTAL_NUMBER로 외부회원/내부회원 여부를 확인 후 정보를 가져온다.
+
+create or replace PROCEDURE VIEW_MEMBER_INFORMATION
+(
+  member_num IN TOTAL_MEMBER.TOTAL_M_NO%TYPE,
+  member_email OUT VARCHAR2,
+  member_name OUT VARCHAR2
+)
+IS
+  general_member NUMBER;
+  external_member NUMBER;
+BEGIN
+  -- member_num을 받아서 TOTAL_MEMBER테이블에서 external_member, general_member 가져오기.
+  SELECT EXTER_M_NO, MEMBER_NO INTO external_member, general_member FROM TOTAL_MEMBER
+  WHERE TOTAL_M_NO = member_num;
+  
+  --TOTAL_NUMBER테이블에서 가져온 external_member로 외부회원정보 조회
+  IF external_member IS NOT NULL THEN
+    SELECT EXTER_MEM_NAME, EXTER_M_EMAIL INTO member_name, member_email 
+    FROM EXTERNAL_M_INFO
+    WHERE EXTER_M_NO = external_member;
+    
+  --TOTAL_NUMBER테이블에서 가져온 general_member로 외부회원정보 조회 
+  ELSIF general_member IS NOT NULL THEN
+    SELECT MEMBER_NAME, EMAIL INTO member_email, member_name
+    FROM INTER_M_INFO
+    WHERE MEMBER_NO = general_member;
+  END IF;
+  
+END VIEW_MEMBER_INFORMATION;
+
+
