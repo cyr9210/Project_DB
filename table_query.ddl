@@ -328,3 +328,13 @@ ALTER TABLE TAG
 
 ALTER TABLE TAG
 	ADD (CONSTRAINT  R_52 FOREIGN KEY (INFO_NO) REFERENCES PRJ_INFO(INFO_NO));
+
+--
+alter table notice 
+  modify invite_no not null;    
+  
+create sequence invete_seq 
+start with 1 increment BY 1 maxvalue 100000;
+
+create sequence notice_seq 
+start with 1 increment BY 1 maxvalue 100000;
