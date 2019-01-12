@@ -390,3 +390,24 @@ CREATE SEQUENCE LABEL_NO_SEQ;
 CREATE SEQUENCE D_DAY_NO_SEQ;
 CREATE SEQUENCE TOTAL_M_NO_SEQ;
 CREATE SEQUENCE INFO_NO_SEQ;
+
+--황소희 트리거 추가
+-- insert 될때마다 total_member 테이블에도 새 멤버를 insert 해주는 트리거
+CREATE OR REPLACE TRIGGER total_m_inst_trg_ext
+AFTER
+INSERT ON EXTERNAL_M_INFO
+FOR EACH ROW
+BEGIN
+  insert into TOTAL_MEMBER values(TOTAL_M_NO_SEQ.nextval,:new.exter_m_no, null);
+END;
+/
+
+-- INTER_M_INFO 테이블에 해당
+CREATE OR REPLACE TRIGGER total_m_inst_trg_int
+AFTER
+INSERT ON INTER_M_INFO
+FOR EACH ROW
+BEGIN
+  insert into TOTAL_MEMBER values(TOTAL_M_NO_SEQ.nextval,null, :new.member_no);
+END;
+/
