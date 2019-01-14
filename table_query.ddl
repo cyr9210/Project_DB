@@ -433,13 +433,52 @@ CREATE SEQUENCE D_DAY_NO_SEQ;
 CREATE SEQUENCE TOTAL_M_NO_SEQ;
 CREATE SEQUENCE INFO_NO_SEQ;
 
+--황소희 트리거 추가 19-01-12
+-- insert 될때마다 total_member 테이블에도 새 멤버를 insert 해주는 트리거
+CREATE OR REPLACE TRIGGER total_m_inst_trg_ext
+AFTER
+INSERT ON EXTERNAL_M_INFO
+FOR EACH ROW
+BEGIN
+  insert into TOTAL_MEMBER values(TOTAL_M_NO_SEQ.nextval,:new.exter_m_no, null);
+END;
+/
 
+-- INTER_M_INFO 테이블에 해당
+CREATE OR REPLACE TRIGGER total_m_inst_trg_int
+AFTER
+INSERT ON INTER_M_INFO
+FOR EACH ROW
+BEGIN
+  insert into TOTAL_MEMBER values(TOTAL_M_NO_SEQ.nextval,null, :new.member_no);
+END;
+/
 
-
-
-
-
-
+--TOTAL_M_NO를 받아서 내부회원인지 외부회원인지 판단하는 프로시저
+CREATE OR REPLACE PROCEDURE IS_INTER_MEM 
+(
+  member_num IN NUMBER 
+, RET OUT BOOLEAN
+) 
+IS
+  general_member NUMBER;
+  external_member NUMBER;
+BEGIN
+  -- member_num을 받아서 TOTAL_MEMBER테이블에서 external_member, general_member 가져오기.
+  SELECT EXTER_M_NO, MEMBER_NO INTO external_member, general_member FROM TOTAL_MEMBER
+  WHERE TOTAL_M_NO = member_num;
+  
+  --외부회원
+  IF external_member IS NOT NULL THEN
+  ret := false;    
+  --내부회원 
+  ELSIF general_member IS NOT NULL THEN
+  ret := true;
+  ELSE
+  DBMS_OUTPUT.PUT_LINE('error!');
+  END IF;
+END IS_INTER_MEM;
+/
 -- 외부회원 정보
 INSERT INTO EXTERNAL_M_INFO VALUES(EXTER_M_NO_SEQ.nextval, '회원1', 'sohee@naver.com', 'naver');
 INSERT INTO EXTERNAL_M_INFO VALUES(EXTER_M_NO_SEQ.nextval, '회원2', 'sohyun@google.com', 'google');
