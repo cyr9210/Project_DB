@@ -737,3 +737,7 @@ add (pjt_writer varchar2(20));
 
 alter table project 
 add (pjt_contents varchar2(200));
+			   
+--최용락 20190116
+ALTER TABLE LABEL
+    ADD CONSTRAINT PJTNO_LTEXT_CNO_UNIQUE UNIQUE(LABEL_TEXT, COLOR_NO, PJT_NO);
