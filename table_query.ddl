@@ -737,3 +737,6 @@ add (pjt_writer varchar2(20));
 
 alter table project 
 add (pjt_contents varchar2(200));
+
+--황소희 20190116
+ALTER TABLE INTER_M_INFO ADD UNIQUE (EMAIL);
