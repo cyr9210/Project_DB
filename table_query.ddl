@@ -39,8 +39,9 @@ ALTER TABLE CARD
 CREATE TABLE CHAT
 (
 	CHAT_NO  NUMBER  NOT NULL ,
-	CHAT_TITLE  VARCHAR2(500)  NULL ,
-	INFO_NO  NUMBER  NOT NULL 
+	INFO_NO  NUMBER  NOT NULL ,
+    chat_contents  varchar2(500) not null,
+    chat_date date not null
 );
 
 
@@ -277,6 +278,16 @@ CREATE TABLE PROJECT
 ALTER TABLE PROJECT
 	ADD CONSTRAINT  XPK프로젝트 PRIMARY KEY (PJT_NO);
 
+--윤병록 20190114
+alter table project
+add (total_m_no number not null);
+
+alter table project
+add constraint pjt_total_m_no_fk foreign key(total_m_no)
+references total_member(total_m_no) on delete cascade;
+
+alter table project 
+add (pjt_contents varchar2(200));
 
 CREATE TABLE REPLY
 (
@@ -558,9 +569,9 @@ INSERT INTO INTER_M_INFO VALUES(MEM_NO_SEQ.nextval, 'ghkdthgus', '회원6', 'Hwa
 
 
 --PROJECT
-INSERT INTO PROJECT VALUES (pjt_no.nextval, sysdate , 'kostaProject');
-INSERT INTO PROJECT VALUES (pjt_no.nextval, sysdate , 'kepcoProject');
-INSERT INTO PROJECT VALUES (pjt_no.nextval, sysdate , 'motorshowProject');
+INSERT INTO PROJECT VALUES (pjt_no.nextval, sysdate , 'kostaProject', 1, 'fff');
+INSERT INTO PROJECT VALUES (pjt_no.nextval, sysdate , 'kepcoProject', 1, 'fff');
+INSERT INTO PROJECT VALUES (pjt_no.nextval, sysdate , 'motorshowProject', 1, 'fff');
 
 
 
@@ -731,12 +742,6 @@ INSERT INTO CHARGE_INFO VALUES(CHARGE_INFO_NO_SEQ.NEXTVAL,1,1);
 INSERT INTO CHARGE_INFO VALUES(CHARGE_INFO_NO_SEQ.NEXTVAL,2,1);
 INSERT INTO CHARGE_INFO VALUES(CHARGE_INFO_NO_SEQ.NEXTVAL,3,1);
 
---윤병록 20190114
-alter table project
-add (pjt_writer varchar2(20));
-
-alter table project 
-add (pjt_contents varchar2(200));
 			   
 --최용락 20190116
 ALTER TABLE LABEL
