@@ -419,7 +419,7 @@ DROP SEQUENCE LABEL_INFO_NO_SEQ;
 DROP SEQUENCE CHARGE_INFO_NO_SEQ;
 
 --정철희
-CREATE SEQUENCE CARD_SEQ;
+CREATE SEQUENCE CARD_SEQ INCREMENT BY 4;
 									
 CREATE SEQUENCE DESCRIPTION_SEQ;
 									
@@ -581,10 +581,12 @@ INSERT INTO INVITE VALUES(INVITE_SEQ.nextval, 'nomal', 1, 3);
 
 
 --CARD
-INSERT INTO card VALUES (card_seq.nextval,'To Do',1,1);
-INSERT INTO card VALUES (card_seq.nextval,'Doing',2,1);
-INSERT INTO card VALUES (card_seq.nextval,'Done',3,1);
-INSERT INTO card VALUES (card_seq.nextval,'Close',4,1);
+insert all
+into card values(card_seq.nextval, 'To Do', 1, 1)
+into card values(card_seq.nextval+1, 'Doing', 2, 1)
+into card values(card_seq.nextval+2, 'Done', 3, 1)
+into card values(card_seq.nextval+3,'Close', 4, 1)
+select * from dual;
 
 
 
@@ -754,4 +756,22 @@ INSERT INTO PRJ_INFO VALUES (INFO_NO_SEQ.NEXTVAL,4);
 INSERT INTO PRJ_INFO VALUES (INFO_NO_SEQ.NEXTVAL,5);
 INSERT INTO PRJ_INFO VALUES (INFO_NO_SEQ.NEXTVAL,6);
 
+--최용락 20190120
+insert all
+into card values(card_seq.nextval, 'To Do', 1, 2)
+into card values(card_seq.nextval+1, 'Doing', 2, 2)
+into card values(card_seq.nextval+2, 'Done', 3, 2)
+into card values(card_seq.nextval+3,'Close', 4, 2)
+select * from dual;
 
+insert all
+into card values(card_seq.nextval, 'To Do', 1, 3)
+into card values(card_seq.nextval+1, 'Doing', 2, 3)
+into card values(card_seq.nextval+2, 'Done', 3, 3)
+into card values(card_seq.nextval+3,'Close', 4, 3)
+select * from dual;
+			   
+--김근열 20190122
+alter table invite
+add constraint pno_ino_unique unique(pjt_no, total_m_no);
+		
