@@ -770,3 +770,8 @@ into card values(card_seq.nextval+1, 'Doing', 2, 3)
 into card values(card_seq.nextval+2, 'Done', 3, 3)
 into card values(card_seq.nextval+3,'Close', 4, 3)
 select * from dual;
+			   
+--김근열 20190122
+alter table invite
+add constraint pno_ino_unique unique(pjt_no, total_m_no);
+		
