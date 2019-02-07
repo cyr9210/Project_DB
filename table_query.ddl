@@ -3,14 +3,12 @@
 DROP TABLE LABEL CASCADE CONSTRAINTS PURGE;
 DROP TABLE LIST CASCADE CONSTRAINTS PURGE;
 DROP TABLE CHECKLIST CASCADE CONSTRAINTS PURGE;
-DROP TABLE D_DAY CASCADE CONSTRAINTS PURGE;
 --DROP TABLE INTERLINKED_INFO CASCADE CONSTRAINTS PURGE;
 DROP TABLE CHAT_HISTORY CASCADE CONSTRAINTS PURGE;
 DROP TABLE CHAT CASCADE CONSTRAINTS PURGE;
 DROP TABLE NOTICE CASCADE CONSTRAINTS PURGE;
 DROP TABLE TAG CASCADE CONSTRAINTS PURGE;
 DROP TABLE REPLY CASCADE CONSTRAINTS PURGE;
-DROP TABLE DESCRIPTION CASCADE CONSTRAINTS PURGE;
 DROP TABLE POST CASCADE CONSTRAINTS PURGE;
 DROP TABLE PRJ_INFO CASCADE CONSTRAINTS PURGE;
 DROP TABLE INTER_M_INFO CASCADE CONSTRAINTS PURGE;
@@ -73,28 +71,7 @@ ALTER TABLE CHECKLIST
 	ADD CONSTRAINT  XPK체크리스트 PRIMARY KEY (CHECKLIST_NO);
 
 
-CREATE TABLE D_DAY
-(
-	D_DAY_NO  NUMBER  NOT NULL ,
-	D_DATE  DATE  NOT NULL ,
-	P_NO  NUMBER  NOT NULL 
-);
 
-
-ALTER TABLE D_DAY
-	ADD CONSTRAINT  XPK마감일 PRIMARY KEY (D_DAY_NO);
-
-
-CREATE TABLE DESCRIPTION
-(
-	D_NO  NUMBER  NOT NULL ,
-	D_CONTENTS  VARCHAR2(3000)  NOT NULL ,
-	P_NO  NUMBER  NOT NULL 
-);
-
-
-ALTER TABLE DESCRIPTION
-	ADD CONSTRAINT  XPK세부내용 PRIMARY KEY (D_NO);
 
 
 CREATE TABLE EXTERNAL_M_INFO
@@ -175,7 +152,7 @@ CREATE TABLE LIST
 (
 	LIST_NO  NUMBER  NOT NULL ,
 	LIST_INFO  VARCHAR2(1024)  NOT NULL ,
-	CHECKED  NUMBER NULL ,
+	CHECKED  NUMBER DEFAULT(0) NOT NULL,
 	CHECKLIST_NO  NUMBER  NOT NULL 
 );
 
@@ -204,7 +181,9 @@ CREATE TABLE POST
 	P_NO  NUMBER  NOT NULL ,
 	P_TITLE  VARCHAR2(500)  NOT NULL ,
 	P_POSITION  NUMBER  NOT NULL ,
-	C_NO  NUMBER  NOT NULL 
+	C_NO  NUMBER  NOT NULL,
+    P_DESCRIPTION VARCHAR2(1000) NULL,
+    P_DDAY DATE NULL
 );
 
 
@@ -326,11 +305,6 @@ ALTER TABLE CHAT_HISTORY
 ALTER TABLE CHECKLIST
 	ADD (CONSTRAINT  R_12 FOREIGN KEY (P_NO) REFERENCES POST(P_NO)on DELETE CASCADE);
 
-ALTER TABLE D_DAY
-	ADD (CONSTRAINT  R_14 FOREIGN KEY (P_NO) REFERENCES POST(P_NO)on DELETE CASCADE);
-
-ALTER TABLE DESCRIPTION
-	ADD (CONSTRAINT  R_10 FOREIGN KEY (P_NO) REFERENCES POST(P_NO)on DELETE CASCADE);
 
 --ALTER TABLE INTERLINKED_INFO
 --	ADD (CONSTRAINT  R_21 FOREIGN KEY (EXTER_M_NO) REFERENCES EXTERNAL_M_INFO(EXTER_M_NO));
@@ -378,8 +352,6 @@ ALTER TABLE LABEL
 --drop seq
 DROP SEQUENCE CARD_SEQ;
 									
-DROP SEQUENCE DESCRIPTION_SEQ;
-									
 DROP SEQUENCE POST_SEQ;
 									
 DROP SEQUENCE REPLY_SEQ;
@@ -408,8 +380,6 @@ DROP SEQUENCE list_seq;
 
 DROP SEQUENCE LABEL_NO_SEQ;
 
-DROP SEQUENCE D_DAY_NO_SEQ;
-
 DROP SEQUENCE TOTAL_M_NO_SEQ;
 
 DROP SEQUENCE INFO_NO_SEQ;
@@ -421,7 +391,6 @@ DROP SEQUENCE CHARGE_INFO_NO_SEQ;
 --정철희
 CREATE SEQUENCE CARD_SEQ INCREMENT BY 4;
 									
-CREATE SEQUENCE DESCRIPTION_SEQ;
 									
 CREATE SEQUENCE POST_SEQ;
 									
@@ -490,7 +459,6 @@ create SEQUENCE list_seq;
 CREATE SEQUENCE CHARGE_INFO_NO_SEQ;
 CREATE SEQUENCE LABEL_INFO_NO_SEQ;
 CREATE SEQUENCE LABEL_NO_SEQ;
-CREATE SEQUENCE D_DAY_NO_SEQ;
 CREATE SEQUENCE TOTAL_M_NO_SEQ;
 CREATE SEQUENCE INFO_NO_SEQ;
 
@@ -598,27 +566,15 @@ INSERT INTO PRJ_INFO VALUES(INFO_NO_SEQ.NEXTVAL,3);
 
 
 --POST
-INSERT INTO post VALUES (post_seq.nextval,'포스트1-1',1,1);
-INSERT INTO post VALUES (post_seq.nextval,'포스트2-1',1,2);
-INSERT INTO post VALUES (post_seq.nextval,'포스트3-1',1,3);
-INSERT INTO post VALUES (post_seq.nextval,'포스트4-1',1,4);
-INSERT INTO post VALUES (post_seq.nextval,'포스트1-2',2,1);
-INSERT INTO post VALUES (post_seq.nextval,'포스트2-2',2,2);
-INSERT INTO post VALUES (post_seq.nextval,'포스트3-2',2,3);
-INSERT INTO post VALUES (post_seq.nextval,'포스트4-2',2,4);
+INSERT INTO post VALUES (post_seq.nextval,'포스트1-1',1,1,'포스트1-1에 대한 설명',TO_DATE('20190220', 'YYYYMMDD'));
+INSERT INTO post VALUES (post_seq.nextval,'포스트2-1',1,2,'포스트2-1에 대한 설명', TO_DATE('20190220', 'YYYYMMDD'));
+INSERT INTO post VALUES (post_seq.nextval,'포스트3-1',1,3, '포스트3-1에 대한 설명', TO_DATE('20190320', 'YYYYMMDD'));
+INSERT INTO post VALUES (post_seq.nextval,'포스트4-1',1,4, '포스트4-1에 대한 설명', TO_DATE('20190520', 'YYYYMMDD'));
+INSERT INTO post VALUES (post_seq.nextval,'포스트1-2',2,1, '포스트1-2에 대한 설명', TO_DATE('20190620', 'YYYYMMDD'));
+INSERT INTO post VALUES (post_seq.nextval,'포스트2-2',2,2, '포스트2-2에 대한 설명', TO_DATE('20190820', 'YYYYMMDD'));
+INSERT INTO post VALUES (post_seq.nextval,'포스트3-2',2,3, '포스트3-2에 대한 설명', TO_DATE('20190720', 'YYYYMMDD'));
+INSERT INTO post VALUES (post_seq.nextval,'포스트4-2',2,4, '포스트4-2에 대한 설명', TO_DATE('20190920', 'YYYYMMDD'));
 
-
-
-
---DESCRIPTION
-INSERT INTO description VALUES (description_seq.nextval,'포스트1-1에 대한 설명',1);
-INSERT INTO description VALUES (description_seq.nextval,'포스트2-1에 대한 설명',2);
-INSERT INTO description VALUES (description_seq.nextval,'포스트3-1에 대한 설명',3);
-INSERT INTO description VALUES (description_seq.nextval,'포스트4-1에 대한 설명',4);
-INSERT INTO description VALUES (description_seq.nextval,'포스트1-2에 대한 설명',5);
-INSERT INTO description VALUES (description_seq.nextval,'포스트2-2에 대한 설명',6);
-INSERT INTO description VALUES (description_seq.nextval,'포스트3-2에 대한 설명',7);
-INSERT INTO description VALUES (description_seq.nextval,'포스트4-2에 대한 설명',8);
 
 
 
@@ -666,17 +622,6 @@ INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'초록',4,2);
 
 
 
---D-DAY
-INSERT INTO d_day VALUES (D_DAY_NO_SEQ.nextval,TO_DATE('20190220', 'YYYYMMDD'),1);
-INSERT INTO d_day VALUES (D_DAY_NO_SEQ.nextval,TO_DATE('20190320', 'YYYYMMDD'),2);
-INSERT INTO d_day VALUES (D_DAY_NO_SEQ.nextval,TO_DATE('20190420', 'YYYYMMDD'),3);
-INSERT INTO d_day VALUES (D_DAY_NO_SEQ.nextval,TO_DATE('20190520', 'YYYYMMDD'),4);
-INSERT INTO d_day VALUES (D_DAY_NO_SEQ.nextval,TO_DATE('20190620', 'YYYYMMDD'),5);
-INSERT INTO d_day VALUES (D_DAY_NO_SEQ.nextval,TO_DATE('20190720', 'YYYYMMDD'),6);
-INSERT INTO d_day VALUES (D_DAY_NO_SEQ.nextval,TO_DATE('20190820', 'YYYYMMDD'),7);
-INSERT INTO d_day VALUES (D_DAY_NO_SEQ.nextval,TO_DATE('20190920', 'YYYYMMDD'),8);
-
-
 
 
 
@@ -705,22 +650,22 @@ INSERT INTO checklist VALUES (CHECKLIST_SEQ.nextval,'포스트4-2 체크리스�
 
 
 --LIST
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명1',null,1);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명2',null,2);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명3',null,3);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명4',null,4);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명5',null,5);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명6',null,6);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명7',null,7);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명8',null,8);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명9',null,9);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명10',null,10);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명11',null,11);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명12',null,12);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명13',null,13);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명14',null,14);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명15',null,15);
-INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명16',null,16);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명1',0,1);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명2',0,2);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명3',0,3);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명4',0,4);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명5',0,5);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명6',0,6);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명7',0,7);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명8',0,8);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명9',0,9);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명10',0,10);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명11',0,11);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명12',0,12);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명13',0,13);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명14',0,14);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명15',0,15);
+INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명16',0,16);
 
 
 
@@ -774,4 +719,10 @@ select * from dual;
 --김근열 20190122
 alter table invite
 add constraint pno_ino_unique unique(pjt_no, total_m_no);
+
+--20190207 DB수정
+DROP TABLE D_DAY CASCADE CONSTRAINTS PURGE;
+DROP SEQUENCE DESCRIPTION_SEQ;
+drop table description cascade constraints purge;
+DROP SEQUENCE D_DAY_NO_SEQ;
 		
