@@ -744,13 +744,15 @@ insert into EXTERNAL_M_INFO values(memberNo_seq.nextval, 'soheemon@gmail.com', '
 
 -- 두개의 테이블에서 name, email가져오는 쿼리 예제
 -- where절 없으면 전체 멤버 조회하게됨
-SELECT
+(SELECT
 memberno, email, name
 FROM
 INTERNAL_M_INFO
+WHERE memberno = 2)
 UNION
-SELECT
+(SELECT
 memberno, email, name
 FROM
 EXTERNAL_M_INFO
-WHERE memberno = 1;										 
+WHERE memberno = 2
+);
