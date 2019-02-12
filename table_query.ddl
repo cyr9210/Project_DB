@@ -734,6 +734,7 @@ DROP TABLE tbl_chat CASCADE CONSTRAINTS PURGE;
 CREATE TABLE tbl_chat(
         chat_no number,
         pjt_no number,
+	total_m_no number,
         writer varchar2(20),
         chatContents varchar2(2000),
         regDate date
