@@ -746,7 +746,7 @@ CREATE SEQUENCE chat_no_seq;
 ALTER TABLE tbl_chat DROP CONSTRAINT tbl_chat_fk;*/
 
 ALTER TABLE tbl_chat add CONSTRAINT tbl_chat_pk PRIMARY KEY (chat_no);
-ALTER TABLE tbl_chat ADD CONSTRAINT tbl_chat_fk FOREIGN KEY (pjt_no) REFERENCES project(pjt_no);
+ALTER TABLE tbl_chat ADD CONSTRAINT tbl_chat_fk FOREIGN KEY (pjt_no) REFERENCES project(pjt_no)on delete cascade;
 
 -- 2019 02 08 황소희 프로젝트별 채팅 개수 관리 테이블
 DROP TABLE tbl_chat_cnt;
@@ -759,4 +759,4 @@ CREATE TABLE tbl_chat_cnt(
 ALTER TABLE tbl_chat_cnt DROP CONSTRAINT tbl_chatCnt_fk;*/
 
 ALTER TABLE tbl_chat_cnt add CONSTRAINT tbl_chatCnt_pk PRIMARY KEY (pjt_no);
-ALTER TABLE tbl_chat_cnt ADD CONSTRAINT tbl_chatCnt_fk FOREIGN KEY (pjt_no) REFERENCES project(pjt_no);
+ALTER TABLE tbl_chat_cnt ADD CONSTRAINT tbl_chatCnt_fk FOREIGN KEY (pjt_no) REFERENCES project(pjt_no)on delete cascade;
