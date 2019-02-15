@@ -471,9 +471,9 @@ BEGIN
 END IS_INTER_MEM;
 /
 -- 외부회원 정보
-INSERT INTO EXTERNAL_M_INFO VALUES(EXTER_M_NO_SEQ.nextval, '회원1', 'sohee@naver.com', 'naver', 343434343);
-INSERT INTO EXTERNAL_M_INFO VALUES(EXTER_M_NO_SEQ.nextval, '회원2', 'sohyun@google.com', 'google', 3434343);
-INSERT INTO EXTERNAL_M_INFO VALUES(EXTER_M_NO_SEQ.nextval, '회원3', 'ppoppy@kakao.co.kr', 'kakao', 43434343);
+INSERT INTO EXTERNAL_M_INFO VALUES(EXTER_M_NO_SEQ.nextval, '회원1', 'sohee@naver.com', 'naver', 343434343, 'gg');
+INSERT INTO EXTERNAL_M_INFO VALUES(EXTER_M_NO_SEQ.nextval, '회원2', 'sohyun@google.com', 'google', 3434343, 'gg');
+INSERT INTO EXTERNAL_M_INFO VALUES(EXTER_M_NO_SEQ.nextval, '회원3', 'ppoppy@kakao.co.kr', 'kakao', 43434343, 'gg);
 
 -- 내부회원 정보 
 INSERT INTO INTER_M_INFO VALUES(MEM_NO_SEQ.nextval, 'qlalfqjsgh3#', '회원4', 'sohyun@kogile.com');
