@@ -249,7 +249,8 @@ CREATE TABLE REPLY
 	R_CONTENTS  VARCHAR2(2000)  NOT NULL ,
 	R_DATE  DATE  NOT NULL ,
     P_NO  NUMBER  NOT NULL ,	
-    INFO_NO  NUMBER  NOT NULL 
+    INFO_NO  NUMBER  NOT NULL ,
+    TAGED_NAME VARCHAR2(50)
 );
 
 
@@ -542,14 +543,14 @@ INSERT INTO post VALUES (post_seq.nextval,'포스트4-2',2,4, '포스트4-2에 �
 
 
 --reply
-INSERT INTO reply VALUES (reply_seq.nextval,'포스트1-1에 대한 설명의 댓글',sysdate,1,1);
-INSERT INTO reply VALUES (reply_seq.nextval,'포스트2-1에 대한 설명의 댓글',sysdate,2,2);
-INSERT INTO reply VALUES (reply_seq.nextval,'포스트3-1에 대한 설명의 댓글',sysdate,3,1);
-INSERT INTO reply VALUES (reply_seq.nextval,'포스트4-1에 대한 설명의 댓글',sysdate,4,2);
-INSERT INTO reply VALUES (reply_seq.nextval,'포스트1-2에 대한 설명의 댓글',sysdate,5,1);
-INSERT INTO reply VALUES (reply_seq.nextval,'포스트2-2에 대한 설명의 댓글',sysdate,6,2);
-INSERT INTO reply VALUES (reply_seq.nextval,'포스트3-2에 대한 설명의 댓글',sysdate,7,1);
-INSERT INTO reply VALUES (reply_seq.nextval,'포스트4-2에 대한 설명의 댓글',sysdate,8,2);
+INSERT INTO reply VALUES (reply_seq.nextval,'포스트1-1에 대한 설명의 댓글',sysdate,1,1,'회원2');
+INSERT INTO reply VALUES (reply_seq.nextval,'포스트2-1에 대한 설명의 댓글',sysdate,2,2,'회원1');
+INSERT INTO reply VALUES (reply_seq.nextval,'포스트3-1에 대한 설명의 댓글',sysdate,3,1,'회원2');
+INSERT INTO reply VALUES (reply_seq.nextval,'포스트4-1에 대한 설명의 댓글',sysdate,4,2,'회원1');
+INSERT INTO reply VALUES (reply_seq.nextval,'포스트1-2에 대한 설명의 댓글',sysdate,5,1,null);
+INSERT INTO reply VALUES (reply_seq.nextval,'포스트2-2에 대한 설명의 댓글',sysdate,6,2,null);
+INSERT INTO reply VALUES (reply_seq.nextval,'포스트3-2에 대한 설명의 댓글',sysdate,7,1,null);
+INSERT INTO reply VALUES (reply_seq.nextval,'포스트4-2에 대한 설명의 댓글',sysdate,8,2,null);
 
 
 
@@ -557,14 +558,11 @@ INSERT INTO reply VALUES (reply_seq.nextval,'포스트4-2에 대한 설명의 �
 
 
 --TAG
-INSERT INTO tag VALUES (TAG_SEQ.nextval,'1',1);
-INSERT INTO tag VALUES (TAG_SEQ.nextval,'2',2);
-INSERT INTO tag VALUES (TAG_SEQ.nextval,'3',1);
-INSERT INTO tag VALUES (TAG_SEQ.nextval,'4',2);
-INSERT INTO tag VALUES (TAG_SEQ.nextval,'5',1);
-INSERT INTO tag VALUES (TAG_SEQ.nextval,'6',2);
-INSERT INTO tag VALUES (TAG_SEQ.nextval,'7',1);
-INSERT INTO tag VALUES (TAG_SEQ.nextval,'8',2);
+INSERT INTO tag VALUES (TAG_SEQ.nextval,1,2);
+INSERT INTO tag VALUES (TAG_SEQ.nextval,2,1);
+INSERT INTO tag VALUES (TAG_SEQ.nextval,3,2);
+INSERT INTO tag VALUES (TAG_SEQ.nextval,4,1);
+
 
 
 
@@ -635,7 +633,7 @@ INSERT INTO list VALUES (LIST_SEQ.nextval,'리스트설명16',0,16);
 
 --NOTICE
 INSERT INTO NOTICE(NOTICE_NO, INVITE_NO, NTC_CONT, NTC_DATE, TOTAL_M_NO) VALUES(NOTICE_SEQ.NEXTVAL, 1, '초대됐음!', SYSDATE, 1);
-INSERT INTO NOTICE(NOTICE_NO, TAG_NO, NTC_CONT, NTC_DATE, TOTAL_M_NO) VALUES(NOTICE_SEQ.NEXTVAL, 2, '태그됐음!', SYSDATE, 4);
+INSERT INTO NOTICE(NOTICE_NO, TAG_NO, NTC_CONT, NTC_DATE, TOTAL_M_NO) VALUES(NOTICE_SEQ.NEXTVAL, 2, '태그됐음!', SYSDATE, 2);
 
 INSERT INTO NOTICE(NOTICE_NO, INVITE_NO, NTC_CONT, NTC_DATE, TOTAL_M_NO) VALUES(NOTICE_SEQ.NEXTVAL, 3, '초대됐음!', SYSDATE, 5);
 
