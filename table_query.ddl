@@ -763,3 +763,9 @@ ALTER TABLE tbl_chat_cnt DROP CONSTRAINT tbl_chatCnt_fk;*/
 
 ALTER TABLE tbl_chat_cnt add CONSTRAINT tbl_chatCnt_pk PRIMARY KEY (pjt_no);
 ALTER TABLE tbl_chat_cnt ADD CONSTRAINT tbl_chatCnt_fk FOREIGN KEY (pjt_no) REFERENCES project(pjt_no)on delete cascade;
+										 
+-- 20190224 김근열
+alter table notice add (flag number);
+									 
+										 
+										 
