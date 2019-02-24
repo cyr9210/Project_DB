@@ -701,7 +701,7 @@ CREATE TABLE BOARD(
 B_NO NUMBER NOT NULL,
 B_TITLE VARCHAR2(100) NOT NULL,
 B_CONTENT VARCHAR2(1000) NOT NULL,
-INFO_NO NUMBER NOT NULL,
+INFO_NO NUMBER NULL,
 FNAME VARCHAR2(400) NULL,
 REGDATE DATE DEFAULT SYSDATE NOT NULL,
 UPDATE_DATE DATE DEFAULT SYSDATE NOT NULL,
@@ -766,6 +766,8 @@ ALTER TABLE tbl_chat_cnt ADD CONSTRAINT tbl_chatCnt_fk FOREIGN KEY (pjt_no) REFE
 										 
 -- 20190224 김근열
 alter table notice add (flag number);
-									 
+
+alter table board
+add(writer varchar2(100));
 										 
 										 
