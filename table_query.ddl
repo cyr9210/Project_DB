@@ -761,7 +761,7 @@ ALTER TABLE tbl_chat_cnt add CONSTRAINT tbl_chatCnt_pk PRIMARY KEY (pjt_no);
 ALTER TABLE tbl_chat_cnt ADD CONSTRAINT tbl_chatCnt_fk FOREIGN KEY (pjt_no) REFERENCES project(pjt_no)on delete cascade;
 										 
 -- 20190224 김근열
-alter table notice add (flag number);
+alter table notice add (flag number default 1);
 
 										 --NOTICE
 INSERT INTO NOTICE(NOTICE_NO, INVITE_NO, NTC_CONT, NTC_DATE, TOTAL_M_NO, FLAG) VALUES(NOTICE_SEQ.NEXTVAL, 1, '초대됐음!', SYSDATE, 1, 1);
