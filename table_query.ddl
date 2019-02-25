@@ -569,14 +569,14 @@ INSERT INTO tag VALUES (TAG_SEQ.nextval,4,1);
 
 
 --LABEL
-INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'빨강',1,1);
-INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'주황',2,1);
-INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'노랑',3,1);
-INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'초록',4,1);
-INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'빨강',1,2);
-INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'주황',2,2);
-INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'노랑',3,2);
-INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'초록',4,2);
+INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'Red',1,1);
+INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'Orange',2,1);
+INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'Yellow',3,1);
+INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'Green',4,1);
+INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'Red',1,2);
+INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'Orange',2,2);
+INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'Yellow',3,2);
+INSERT INTO label VALUES (LABEL_NO_SEQ.nextval,'Green',4,2);
 
 
 
